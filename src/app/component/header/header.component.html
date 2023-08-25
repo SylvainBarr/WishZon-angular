@@ -1,0 +1,22 @@
+<header class="p-3 text-bg-dark">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <h3 class="text-primary me-3">WhishZon</h3>
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a routerLink="/products" class="nav-link px-2 text-white">Products</a></li>
+        <li><a routerLink="/products/categories" class="nav-link px-2 text-white">Categories</a></li>
+      </ul>
+
+      <div class="text-end">
+        <a *ngIf="!(token$ | async)" routerLink="/login" class="btn btn-outline-light me-2">Login</a>
+
+        <ng-container *ngIf="token$ | async">
+          <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle mx-2">
+          <a routerLink="/my-profile" class="btn btn-outline-light mx-1">My profile</a>
+          <button (click)="onClickLogout()" class="btn btn-outline-light mx-1">Logout</button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</header>

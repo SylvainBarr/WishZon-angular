@@ -1,0 +1,32 @@
+
+
+<table class="table mt-5">
+  <thead class="table-dark">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Brand</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products$|async">
+    <td>{{product.id}}</td>
+    <td>{{product.title}}</td>
+    <td>{{product.brand}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.category}}</td>
+    <td>
+      <a [routerLink]="['/', 'products', product.id]" class="btn btn-outline-primary text-uppercase">
+        Details
+      </a>
+      <ng-container *ngIf="token$|async">
+        <button class="btn btn-outline-success text-uppercase">Update</button>
+        <button class="btn btn-outline-danger text-uppercase">Delete</button>
+      </ng-container>
+    </td>
+  </tr>
+  </tbody>
+</table>

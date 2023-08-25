@@ -1,0 +1,9 @@
+<div *ngIf="product$ | async as product" class="row col-6 card shadow mx-auto mt-5">
+  <div class="card-body text-center">
+    <h5 class="card-title">{{product.brand}} - {{product.title}}</h5>
+    <div>{{product.category}} - {{product.price}} €</div>
+    <img [src]="product.thumbnail" class="card-img-top">
+    <p>Rating : {{product.rating}} / Stock: {{product.stock}}</p>
+    <button routerLink="/" class="btn btn-dark mt-2">BACK</button>
+  </div>
+</div>
