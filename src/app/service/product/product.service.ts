@@ -63,4 +63,16 @@ export class ProductService {
         )
     )
   }
+
+  getByPartial(searchText: string) {
+    return firstValueFrom(
+      this.http
+        .get<{ products: ProductHttp[] }>(this.baseApiUrl+'products/search?q='+searchText)
+        .pipe(
+          map(response => ({
+            products: response.products.map(pH => Product.fromProductHttpToProduct(pH)),
+          }))
+        )
+    )
+  }
 }

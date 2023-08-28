@@ -1,15 +1,27 @@
 
 
-  <div class="text-center">
+  <div class="text-center" *ngIf="pages.length > 1">
     <a *ngFor="let page of pages; index as i"
        [routerLink]="['/', 'products', 'page', i+1]"
+       class="btn btn-outline-primary mx-1 my-3"
     >
       {{i+1}}
     </a>
-
   </div>
 
-  <table class="table mt-5">
+  <div class="row my-3">
+    <div class="col-lg-4 col-sm-0"></div>
+    <div class="col-lg-4 col-sm-12">
+      <div class="text-center input-group">
+        <input type="text"
+               class="search-area form-control"
+               (keyup) ="onChangeSearch()"
+        >
+      </div>
+    </div>
+  </div>
+
+  <table class="table mt-3  table-striped">
     <thead class="table-dark">
     <tr>
       <th>#</th>
@@ -20,7 +32,7 @@
       <th>Actions</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="table-secondary">
     <tr *ngFor="let product of productsList">
       <td>{{product.id}}</td>
       <td>{{product.title}}</td>

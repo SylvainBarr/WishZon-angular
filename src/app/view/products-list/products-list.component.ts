@@ -51,4 +51,10 @@ export class ProductsListComponent implements OnInit, OnDestroy{
   }
 
 
+  onChangeSearch() {
+    const textInput: HTMLInputElement|null = document.querySelector('.search-area')
+    let searchText = textInput!.value;
+    this.productService.getByPartial(searchText).then(response =>{this.productsList = response.products})
+
+  }
 }
