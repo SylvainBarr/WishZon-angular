@@ -15,14 +15,17 @@ export class ProductService {
     this.baseApiUrl = Environment.API_URL
   }
 
-  getAll(): Promise<Product[]>{
+  getAll(page: number = 1): Promise<{ products: Product[], total: number }> {
     return firstValueFrom(
       this.http
-        .get<{ products: ProductHttp[], total: number}>(this.baseApiUrl+'products')
+        .get<{ products: ProductHttp[], total: number }>(this.baseApiUrl + 'products?skip='+ ((page-1)*30))
         .pipe(
-          map(response => response.products.map(pH => Product.fromProductHttpToProduct(pH)))
+          map(response => ({
+            products: response.products.map(pH => Product.fromProductHttpToProduct(pH)),
+            total: response.total
+          }))
         )
-    )
+    );
   }
 
 
@@ -37,14 +40,17 @@ export class ProductService {
   }
 
 
-  getAllByCategory(category: Category): Promise<Product[]>{
+  getAllByCategory(category: Category): Promise<{ products: Product[], total: number }> {
     return firstValueFrom(
       this.http
-        .get<{ products: ProductHttp[] }>(this.baseApiUrl + 'products/category/' + category)
+        .get<{ products: ProductHttp[], total: number }>(this.baseApiUrl + 'products/category/' + category)
         .pipe(
-          map(response => response.products.map(pH => Product.fromProductHttpToProduct(pH)))
+          map(response => ({
+            products: response.products.map(pH => Product.fromProductHttpToProduct(pH)),
+            total: response.total
+          }))
         )
-    )
+    );
   }
 
 

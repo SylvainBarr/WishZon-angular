@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'my-profile',canActivate: [authGuard], component: ProfileComponent},
   {path: 'products', children: [
       {path:'', component: ProductsListComponent},
+      {path:'page/:pageNumber', component: ProductsListComponent},
       {path: 'categories', children: [
           {path: '', component: CategoriesListComponent},
           {path: ':name', component: ProductsListComponent}
